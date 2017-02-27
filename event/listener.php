@@ -200,24 +200,32 @@ class listener implements EventSubscriberInterface
 	{
 		if (!empty($avatar['user_avatar']))
 		{
-			if ($avatar['user_avatar_width'] >= $avatar['user_avatar_height'])
-			{
-				$avatar_width = ($avatar['user_avatar_width'] > self::MAX_SIZE) ? self::MAX_SIZE : $avatar['user_avatar_width'];
-				if ($avatar_width == self::MAX_SIZE)
-				{
-					$avatar['user_avatar_height'] = round(self::MAX_SIZE/$avatar['user_avatar_width']*$avatar['user_avatar_height']);
-				}
-				$avatar['user_avatar_width'] = $avatar_width;
-			}
-			else
-			{
-				$avatar_height = ($avatar['user_avatar_height'] > self::MAX_SIZE) ? self::MAX_SIZE : $avatar['user_avatar_height'];
-				if ($avatar_height == self::MAX_SIZE)
-				{
-					$avatar['user_avatar_width'] = round(self::MAX_SIZE/$avatar['user_avatar_height']*$avatar['user_avatar_width']);
-				}
-				$avatar['user_avatar_height'] = $avatar_height;
-			}
+		    if ($this->user->style['style_path'] == 'Mobbern3.1')
+            {
+                $avatar['user_avatar_width'] = 50;
+                $avatar['user_avatar_height'] = 50;
+            }
+            else
+            {
+                if ($avatar['user_avatar_width'] >= $avatar['user_avatar_height'])
+                {
+                    $avatar_width = ($avatar['user_avatar_width'] > self::MAX_SIZE) ? self::MAX_SIZE : $avatar['user_avatar_width'];
+                    if ($avatar_width == self::MAX_SIZE)
+                    {
+                        $avatar['user_avatar_height'] = round(self::MAX_SIZE / $avatar['user_avatar_width'] * $avatar['user_avatar_height']);
+                    }
+                    $avatar['user_avatar_width'] = $avatar_width;
+                }
+                else
+                {
+                    $avatar_height = ($avatar['user_avatar_height'] > self::MAX_SIZE) ? self::MAX_SIZE : $avatar['user_avatar_height'];
+                    if ($avatar_height == self::MAX_SIZE)
+                    {
+                        $avatar['user_avatar_width'] = round(self::MAX_SIZE / $avatar['user_avatar_height'] * $avatar['user_avatar_width']);
+                    }
+                    $avatar['user_avatar_height'] = $avatar_height;
+                }
+            }
 			return phpbb_get_user_avatar($avatar);
 		}
 
