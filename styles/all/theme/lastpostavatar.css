@@ -3,6 +3,8 @@
 	display: inline-block;
 	margin-right: 4px;
 	float: left;
+	width: 39px;
+	height: 39px;
 }
 
 .rtl .lastpostavatar img { 
